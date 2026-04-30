@@ -1,0 +1,7 @@
+Charlotte Data Portal
+Sample Report (Dummy)
+
+This is a placeholder report for download testing.
+Replace this file with an actual report when ready.
+
+Generated: 2026-01-30

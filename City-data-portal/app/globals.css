@@ -1,0 +1,563 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400&family=Source+Sans+3:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   CHARLOTTE CIVIC DATA PORTAL
+   Design System Stylesheet
+   ============================================ */
+
+/* ============================================
+   CSS CUSTOM PROPERTIES
+   ============================================ */
+
+@layer base {
+  :root {
+    /* Core Civic Colors */
+    --civic-white: 30 6% 98%;
+    --civic-cream: 40 6% 96%;
+    --civic-sand: 30 6% 90%;
+    --civic-stone: 30 5% 64%;
+    --civic-charcoal: 30 8% 25%;
+    --civic-ink: 30 10% 10%;
+
+    /* Domain Colors (HSL values) */
+    --transport-500: 196 56% 39%;
+    --housing-500: 18 39% 51%;
+    --economy-500: 42 37% 48%;
+    --environment-500: 120 13% 49%;
+    --safety-500: 0 26% 49%;
+
+    /* Semantic */
+    --background: 30 6% 98%;
+    --foreground: 30 8% 25%;
+    --card: 0 0% 100%;
+    --card-foreground: 30 8% 25%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 8% 25%;
+    --primary: 196 56% 39%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 6% 96%;
+    --secondary-foreground: 30 8% 25%;
+    --muted: 30 6% 90%;
+    --muted-foreground: 30 5% 45%;
+    --accent: 30 6% 90%;
+    --accent-foreground: 30 8% 25%;
+    --destructive: 0 26% 49%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 30 6% 88%;
+    --input: 30 6% 88%;
+    --ring: 196 56% 39%;
+    --radius: 0.375rem;
+
+    /* Typography */
+    --font-display: 'Newsreader', Georgia, Cambria, serif;
+    --font-body: 'Source Sans 3', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', Consolas, monospace;
+
+    /* Motion */
+    --rail-timing: cubic-bezier(0.25, 0.1, 0.25, 1);
+    --rail-duration: 400ms;
+    --rail-duration-slow: 700ms;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-civic-white text-civic-charcoal;
+    font-family: var(--font-body);
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Typography Defaults */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply text-civic-ink;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-domain-transport-200 text-civic-ink;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+@layer utilities {
+  /* Domain-specific underlines */
+  .domain-underline-transport {
+    text-decoration: underline;
+    text-decoration-color: theme('colors.domain.transport.300');
+    text-underline-offset: 4px;
+  }
+
+  .domain-underline-housing {
+    text-decoration: underline;
+    text-decoration-color: theme('colors.domain.housing.300');
+    text-underline-offset: 4px;
+  }
+
+  .domain-underline-economy {
+    text-decoration: underline;
+    text-decoration-color: theme('colors.domain.economy.300');
+    text-underline-offset: 4px;
+  }
+
+  .domain-underline-environment {
+    text-decoration: underline;
+    text-decoration-color: theme('colors.domain.environment.300');
+    text-underline-offset: 4px;
+  }
+
+  .domain-underline-safety {
+    text-decoration: underline;
+    text-decoration-color: theme('colors.domain.safety.300');
+    text-underline-offset: 4px;
+  }
+}
+
+/* ============================================
+   COMPONENT STYLES
+   ============================================ */
+
+@layer components {
+  /* Civic Button */
+  .btn-civic {
+    @apply px-6 py-3 font-body font-medium text-sm rounded-civic
+           transition-all duration-rail ease-rail
+           focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .btn-civic-primary {
+    @apply btn-civic bg-civic-ink text-civic-white
+           hover:bg-civic-charcoal focus:ring-civic-charcoal;
+  }
+
+  .btn-civic-secondary {
+    @apply btn-civic bg-civic-cream text-civic-charcoal border border-civic-sand
+           hover:bg-civic-sand focus:ring-civic-stone;
+  }
+
+  .btn-civic-transport {
+    @apply btn-civic bg-domain-transport-500 text-white
+           hover:bg-domain-transport-600 focus:ring-domain-transport-400;
+  }
+
+  /* Civic Card */
+  .card-civic {
+    @apply bg-white rounded-civic-lg border border-civic-sand/50
+           shadow-civic transition-all duration-rail ease-rail;
+  }
+
+  .card-civic-hover {
+    @apply card-civic hover:shadow-civic-lg hover:border-civic-stone/30;
+  }
+
+  .card-civic-interactive {
+    @apply card-civic-hover cursor-pointer
+           hover:translate-y-[-2px];
+  }
+
+  /* Domain Cards */
+  .card-domain {
+    @apply relative overflow-hidden rounded-civic-xl p-5
+           transition-all duration-rail-slow ease-rail;
+  }
+
+  .card-domain-transport {
+    @apply card-domain border-l-4 border-domain-transport-400
+           bg-gradient-to-br from-domain-transport-50 to-white;
+  }
+
+  .card-domain-housing {
+    @apply card-domain border-l-4 border-domain-housing-400
+           bg-gradient-to-br from-domain-housing-50 to-white;
+  }
+
+  .card-domain-economy {
+    @apply card-domain border-l-4 border-domain-economy-400
+           bg-gradient-to-br from-domain-economy-50 to-white;
+  }
+
+  .card-domain-environment {
+    @apply card-domain border-l-4 border-domain-environment-400
+           bg-gradient-to-br from-domain-environment-50 to-white;
+  }
+
+  .card-domain-safety {
+    @apply card-domain border-l-4 border-domain-safety-400
+           bg-gradient-to-br from-domain-safety-50 to-white;
+  }
+
+  /* Civic Input */
+  .input-civic {
+    @apply w-full px-4 py-3 rounded-civic border border-civic-sand
+           bg-white text-civic-charcoal placeholder:text-civic-stone
+           transition-all duration-rail ease-rail
+           focus:outline-none focus:ring-2 focus:ring-domain-transport-300 focus:border-transparent;
+  }
+
+  .input-civic-search {
+    @apply input-civic pl-12 text-lg;
+  }
+
+  /* Metric Display */
+  .metric-civic {
+    @apply font-display tracking-tight text-civic-ink;
+  }
+
+  .metric-civic-large {
+    @apply metric-civic text-metric-large;
+  }
+
+  .metric-civic-medium {
+    @apply metric-civic text-metric-medium;
+  }
+
+  /* Section spacing - Compact */
+  .section-civic {
+    @apply py-6;
+  }
+
+  .section-civic-lg {
+    @apply py-10;
+  }
+  
+  .section-civic-sm {
+    @apply py-4;
+  }
+
+  /* Glass effect for overlays */
+  .glass-civic {
+    @apply bg-white/80 backdrop-blur-civic border border-white/50
+           shadow-civic;
+  }
+
+  /* Data label */
+  .data-label {
+    @apply text-civic-caption font-body font-medium uppercase tracking-wider text-civic-stone;
+  }
+
+  /* Civic heading hierarchy */
+  .heading-civic-hero {
+    @apply font-display text-civic-hero text-civic-ink;
+  }
+
+  .heading-civic-display {
+    @apply font-display text-civic-display text-civic-ink;
+  }
+
+  .heading-civic-title {
+    @apply font-display text-civic-title text-civic-ink;
+  }
+
+  .heading-civic-section {
+    @apply font-display text-civic-heading text-civic-ink;
+  }
+
+  /* Body text */
+  .body-civic {
+    @apply font-body text-civic-body text-civic-charcoal leading-relaxed;
+  }
+
+  .body-civic-large {
+    @apply font-body text-lg text-civic-charcoal leading-relaxed;
+  }
+
+  /* Civic badge */
+  .badge-civic {
+    @apply inline-flex items-center px-3 py-1 rounded-full
+           text-civic-small font-medium;
+  }
+
+  .badge-civic-transport {
+    @apply badge-civic bg-domain-transport-100 text-domain-transport-700;
+  }
+
+  .badge-civic-housing {
+    @apply badge-civic bg-domain-housing-100 text-domain-housing-700;
+  }
+
+  .badge-civic-economy {
+    @apply badge-civic bg-domain-economy-100 text-domain-economy-700;
+  }
+
+  .badge-civic-environment {
+    @apply badge-civic bg-domain-environment-100 text-domain-environment-700;
+  }
+
+  .badge-civic-safety {
+    @apply badge-civic bg-domain-safety-100 text-domain-safety-700;
+  }
+}
+
+/* ============================================
+   CHARLOTTE SYSTEM MAP STYLES
+   ============================================ */
+
+.system-map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.system-node {
+  @apply absolute rounded-full transition-all duration-rail-slow ease-rail;
+}
+
+.system-node::before {
+  content: '';
+  @apply absolute inset-0 rounded-full animate-node-glow;
+}
+
+.system-connection {
+  position: absolute;
+  height: 2px;
+  transform-origin: left center;
+  @apply bg-gradient-to-r from-civic-sand to-transparent opacity-40;
+  transition: opacity var(--rail-duration-slow) var(--rail-timing);
+}
+
+.system-node:hover ~ .system-connection,
+.system-node.active ~ .system-connection {
+  @apply opacity-80;
+}
+
+/* ============================================
+   TIMELINE SLIDER
+   ============================================ */
+
+.timeline-slider {
+  @apply relative w-full h-2 bg-civic-sand rounded-full cursor-pointer;
+}
+
+.timeline-slider-track {
+  @apply absolute inset-y-0 left-0 bg-domain-transport-400 rounded-full;
+  transition: width var(--rail-duration) var(--rail-timing);
+}
+
+.timeline-slider-thumb {
+  @apply absolute w-5 h-5 bg-white border-2 border-domain-transport-500 rounded-full
+         shadow-civic transform -translate-x-1/2 -translate-y-1/2 top-1/2
+         cursor-grab active:cursor-grabbing;
+  transition: transform var(--rail-duration-slow) var(--rail-timing),
+              box-shadow var(--rail-duration) var(--rail-timing);
+}
+
+.timeline-slider-thumb:hover {
+  @apply scale-110 shadow-civic-lg;
+}
+
+.timeline-marker {
+  @apply absolute top-full mt-2 text-civic-small text-civic-stone
+         transform -translate-x-1/2;
+}
+
+/* ============================================
+   CREDIBILITY MODE
+   ============================================ */
+
+.credibility-panel {
+  @apply fixed bottom-0 left-0 right-0 glass-civic
+         transform transition-transform duration-rail ease-rail;
+}
+
+.credibility-panel.collapsed {
+  @apply translate-y-[calc(100%-3rem)];
+}
+
+.credibility-panel.expanded {
+  @apply translate-y-0;
+}
+
+.credibility-content {
+  @apply p-6 text-civic-caption text-civic-charcoal;
+}
+
+.credibility-label {
+  @apply text-civic-small uppercase tracking-wider text-civic-stone font-medium;
+}
+
+/* ============================================
+   CHART STYLING - MINIMAL CIVIC
+   ============================================ */
+
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: theme('colors.civic.sand');
+  stroke-opacity: 0.5;
+}
+
+.recharts-cartesian-axis-tick-value {
+  fill: theme('colors.civic.stone');
+  font-family: var(--font-body);
+  font-size: 12px;
+}
+
+.recharts-legend-item-text {
+  font-family: var(--font-body);
+  color: theme('colors.civic.charcoal') !important;
+}
+
+/* Minimal chart tooltip */
+.chart-tooltip-civic {
+  @apply bg-white rounded-civic border border-civic-sand shadow-civic-lg p-3;
+}
+
+.chart-tooltip-civic-label {
+  @apply font-display font-semibold text-civic-ink mb-1;
+}
+
+.chart-tooltip-civic-value {
+  @apply font-mono text-civic-charcoal;
+}
+
+/* ============================================
+   SCROLLBAR
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-civic-cream;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-civic-stone/40 rounded-full;
+  transition: background var(--rail-duration) var(--rail-timing);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-civic-stone/60;
+}
+
+/* ============================================
+   LEAFLET MAP OVERRIDES
+   ============================================ */
+
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  font-family: var(--font-body);
+}
+
+.leaflet-popup-content-wrapper {
+  @apply rounded-civic-lg shadow-civic-lg;
+}
+
+.leaflet-popup-content {
+  @apply font-body text-civic-charcoal;
+}
+
+/* ============================================
+   RAIL MOTION UTILITIES
+   ============================================ */
+
+.rail-enter {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.rail-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all var(--rail-duration-slow) var(--rail-timing);
+}
+
+.rail-exit {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.rail-exit-active {
+  opacity: 0;
+  transform: translateX(20px);
+  transition: all var(--rail-duration-slow) var(--rail-timing);
+}
+
+/* Stagger animation delays for lists */
+.rail-stagger > * {
+  animation: railSlideIn var(--rail-duration-slow) var(--rail-timing) both;
+}
+
+.rail-stagger > *:nth-child(1) { animation-delay: 0ms; }
+.rail-stagger > *:nth-child(2) { animation-delay: 50ms; }
+.rail-stagger > *:nth-child(3) { animation-delay: 100ms; }
+.rail-stagger > *:nth-child(4) { animation-delay: 150ms; }
+.rail-stagger > *:nth-child(5) { animation-delay: 200ms; }
+.rail-stagger > *:nth-child(6) { animation-delay: 250ms; }
+.rail-stagger > *:nth-child(7) { animation-delay: 300ms; }
+.rail-stagger > *:nth-child(8) { animation-delay: 350ms; }
+
+@keyframes railSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ============================================
+   NEIGHBORHOOD VISUAL IDENTITY ACCENTS
+   ============================================ */
+
+.neighborhood-uptown { --neighborhood-accent: theme('colors.domain.economy.400'); }
+.neighborhood-south-end { --neighborhood-accent: theme('colors.domain.transport.400'); }
+.neighborhood-noda { --neighborhood-accent: theme('colors.domain.housing.400'); }
+.neighborhood-ballantyne { --neighborhood-accent: theme('colors.domain.economy.500'); }
+.neighborhood-university-city { --neighborhood-accent: theme('colors.domain.transport.500'); }
+.neighborhood-dilworth { --neighborhood-accent: theme('colors.domain.environment.400'); }
+.neighborhood-myers-park { --neighborhood-accent: theme('colors.domain.environment.500'); }
+.neighborhood-plaza-midwood { --neighborhood-accent: theme('colors.domain.housing.500'); }
+
+.neighborhood-accent-border {
+  border-left-color: var(--neighborhood-accent, theme('colors.domain.transport.400'));
+}
+
+.neighborhood-accent-text {
+  color: var(--neighborhood-accent, theme('colors.domain.transport.500'));
+}
+
+.neighborhood-accent-bg {
+  background-color: var(--neighborhood-accent, theme('colors.domain.transport.100'));
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    @apply bg-white text-black;
+  }
+
+  .card-civic {
+    @apply shadow-none border border-gray-300;
+  }
+}
